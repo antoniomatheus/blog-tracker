@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect(config.MONGO_URI, {
+  .connect(config.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
@@ -25,6 +25,9 @@ mongoose
     logger.error('Failed to connect to MongoDB:', error);
   });
 
+app.get('/', (req, res) => {
+  res.send('<h1>Welcome to the Blog Tracker system');
+});
 app.use('/api/blogs', blogsRouter);
 app.use(middlewares.errorHandler);
 
